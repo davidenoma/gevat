@@ -14,16 +14,6 @@ from utils import load_real_genotype_data_case_control, load_real_genotype_data
 
 # Set up environment
 # Find CUDA installation path using `whereis cuda` command
-try:
-    cuda_path = subprocess.run(["whereis", "cuda"], capture_output=True, text=True).stdout.split()[1]
-    if cuda_path:
-        os.environ['XLA_FLAGS'] = f'--xla_gpu_cuda_data_dir={cuda_path}'
-        print("CUDA path set for XLA:", cuda_path)
-    else:
-        print("CUDA not found; running without XLA GPU configuration.")
-except IndexError:
-    print("CUDA not found; running without XLA GPU configuration.")
-
 
 os.environ['TF_XLA_FLAGS'] = '--tf_xla_enable_xla_devices'
 
