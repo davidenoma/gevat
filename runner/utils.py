@@ -12,6 +12,18 @@ import tensorflow as tf
 import numpy as np
 from sklearn.model_selection import KFold
 
+# Set global seed (consistent across runs)
+import random
+SEED = 11
+os.environ['PYTHONHASHSEED'] = str(SEED)
+random.seed(SEED)
+np.random.seed(SEED)
+try:
+    tf.random.set_seed(SEED)
+except Exception:
+    pass
+
+
 
 def extract_phenotype(genotype_file):
     """

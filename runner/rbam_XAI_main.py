@@ -15,6 +15,17 @@ import matplotlib.pyplot as plt
 import utils
 from utils import save_summary, load_real_genotype_data_case_control, load_real_genotype_data
 
+# Set global seed (consistent across runs)
+import random
+SEED = 11
+os.environ['PYTHONHASHSEED'] = str(SEED)
+random.seed(SEED)
+np.random.seed(SEED)
+try:
+    tf.random.set_seed(SEED)
+except Exception:
+    pass
+
 # Set up environment
 os.environ['TF_XLA_FLAGS'] = '--tf_xla_enable_xla_devices'
 physical_devices = tf.config.list_physical_devices('GPU')
@@ -274,4 +285,3 @@ shap.plots.bar(explained_data)
 plt.savefig(f"{shap_save_dir}/shap_bar_plot_total.png")
 
 sys.exit()
-

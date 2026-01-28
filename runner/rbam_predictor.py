@@ -12,6 +12,16 @@ from sklearn.utils import class_weight,resample
 from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier
 from xgboost import XGBClassifier
+# Set global seed (consistent across runs)
+import random
+SEED = 11
+os.environ['PYTHONHASHSEED'] = str(SEED)
+random.seed(SEED)
+np.random.seed(SEED)
+try:
+    tf.random.set_seed(SEED)
+except Exception:
+    pass
 # Set up environment
 os.environ['TF_XLA_FLAGS'] = '--tf_xla_enable_xla_devices'
 physical_devices = tf.config.list_physical_devices('GPU')
@@ -392,4 +402,3 @@ for model_type, space in classifier_space.items():
     print(
         f"Cross-Validation Accuracy for {model_type} ({snp_file_name}) : {avg_accuracy_val}")
     print(f"Cross-Validation AUC for {model_type} ({snp_file_name} : {avg_auc_val}")
-

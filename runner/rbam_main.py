@@ -7,9 +7,20 @@ import tensorflow as tf
 from hyperopt import fmin, hp, tpe, space_eval
 from matplotlib import pyplot as plt
 
-
 import utils
 from utils import load_real_genotype_data_case_control, load_real_genotype_data
+
+# Set global seed (consistent across runs)
+import random
+SEED = 11
+os.environ['PYTHONHASHSEED'] = str(SEED)
+random.seed(SEED)
+np.random.seed(SEED)
+# For TensorFlow random operations
+try:
+    tf.random.set_seed(SEED)
+except Exception:
+    pass
 
 
 # Set up environment
