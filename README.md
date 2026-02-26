@@ -103,7 +103,7 @@ python runner/rbam_XAI_main.py test_geno/test_geno.raw test_geno/test_geno.bim c
 
 **Features:**
 - Hyperparameter optimization using Hyperopt
-- SHAP (SHapley Additive exPlanations) for explainable AI
+- SHAP (Shapley Additive exPlanations) for explainable AI
 - Feature importance extraction
 - Reconstruction quality metrics
 
@@ -117,22 +117,45 @@ python runner/rbam_XAI_main.py test_geno/test_geno.raw test_geno/test_geno.bim c
 ```bash
 python runner/rbam_predictor.py test_geno/test_geno.raw
 ```
+#### RBAM Dual Task: `runner/rbam_dual_task.py`
+
+A compact runner to train the  VAE + Classifier (default).
+
+Quick usage
+
+```bash
+# Train (Joint VAE + Classifier) on .raw data
+python runner/rbam_dual_task.py test_geno/test_geno.raw
+
+# Run CV and hyperparameter tuning
+python runner/rbam_dual_task.py test_geno/test_geno.raw --run_cv --run_hyperopt --max_evals 10
+```
+
+Key arguments (short)
+- `snp_data_loc`: Path to PLINK `.raw` file (expects `PHENOTYPE` column).
+- `--model_type`: kept for compatibility; only `joint` is supported.
+- `--test_size`: fraction held out as independent test (default: 0.2).
+- `--run_cv`, `--n_folds`, `--run_hyperopt`, `--max_evals`, `--latent_dim`, `--epochs`, `--batch_size`, `--learning_rate`.
+
 
 **Classifiers Implemented:**
 - Logistic Regression
 - Random Forest
 - XGBoost
 - Neural Network (TensorFlow)
+- Dual Task (VAE + latent space classifier)
 
 **Features:**
 - Automated hyperparameter tuning
 - Cross-validation
-- Class imbalance handling
-- Multiple performance metrics (Accuracy, AUC, R²)
+
+- Multiple performance metrics (Accuracy, AU-ROC)
 
 **Output:**
 - Classification results: `model_outputs/rbam_classifier/`
 - Performance metrics for each classifier
+- Trained model(s), predictions, and metrics in `--output_dir` (default: `./model_outputs`).
+- CV and hyperopt results saved under `model_outputs/cv/` and `model_outputs/hyperopt/`.
 
 
 ### 3. Single Folder Processing with MOKA Pipeline
@@ -321,3 +344,5 @@ For questions and support:
 - UK Biobank, dbGaP, and WTCCC for providing genetic data
 - DisGeNET for disease-gene association validation
 - The MOKA pipeline for association mapping framework
+
+
