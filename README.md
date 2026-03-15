@@ -284,7 +284,7 @@ python single_folder_reconstruction_and_moka.py test_geno --plink-path /usr/loca
 ### 3. Classification Framework
 - **Multiple Algorithms**: Logistic Regression, Random Forest, XGBoost, Neural Networks
 - **Class Imbalance Handling**: Balanced class weights and downsampling
-- **Performance Metrics**: Accuracy, AUC, R² scores
+- **Performance Metrics**: Accuracy & AUC
 
 ### 4. Association Mapping
 - **Integration with MOKA**: Seamless pipeline for GWAS
