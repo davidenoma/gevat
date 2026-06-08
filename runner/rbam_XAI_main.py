@@ -202,7 +202,7 @@ mse_test = np.mean(np.square(X_test - reconstructed_data_test))
 mse_whole = np.mean(np.square(snp_data - reconstructed_full_data))
 
 # Save MSE values
-utils.save_mse_values(snp_data_loc, mse_train, mse_test, mse_whole, hopt="hopt_AE")
+utils.save_mse_values(snp_data_loc, mse_test, mse_whole, hopt="hopt_AE", mse_train=mse_train)
 
 # RMSE of reconstruction
 rmse_train = np.sqrt(mse_train)
@@ -215,7 +215,7 @@ r2_test = np.mean(utils.evaluate_r2(X_test, reconstructed_data_test))
 r2_whole = np.mean(utils.evaluate_r2(snp_data, reconstructed_full_data))
 
 # Save R² scores
-utils.save_r2_scores(snp_data_loc, r2_train, r2_test, r2_whole, hopt="hopt_AE")
+utils.save_r2_scores(snp_data_loc, r2_test, r2_whole, hopt="hopt_AE", r2train=r2_train)
 
 # Adjusted R² of reconstruction
 n_train, p_train = X_train.shape
