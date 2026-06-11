@@ -312,10 +312,7 @@ The framework provides comprehensive evaluation:
 
 ## Citation
 
-If you use GEVAT in your research, please cite:
-Representation learning-based genome-wide association mapping discovers genes underlying complex traits
-https://doi.org/10.21203/rs.3.rs-7624342/v1  
-
+If you use GEVAT in your research, please cite.
 
 ## Contributing
 
