@@ -1,23 +1,23 @@
-# RBAM: Representation Learning-Based Genome-wide Association Mapping
+# GEVAT: Genotype-Embedding-Weighted Variance-Component Test
 
 <div align="center">
- <img width="600" height="600" alt="rbam_method,rbam_logo" src="https://github.com/user-attachments/assets/150c58a8-8e1e-4824-bc44-11efbd2cd2c7" />
+ <img width="600" height="600" alt="gevat_method,gevat_logo" src="https://github.com/user-attachments/assets/150c58a8-8e1e-4824-bc44-11efbd2cd2c7" />
 </div>
 
 ## Overview
-RBAM  is a framework that leverages variational autoencoders (VAE) to learn latent genotype representations, facilitating representation-informed association mapping and phenotype classification. This approach addresses limitations of traditional GWAS by accounting for polygenicity, epistatic interactions, and linkage disequilibrium.
+GEVAT (Genotype-Embedding-Weighted Variance-Component Test) is a framework that leverages variational autoencoders (VAE) to learn latent genotype representations, facilitating representation-informed association mapping and phenotype classification. This approach addresses limitations of traditional GWAS by accounting for polygenicity, epistatic interactions, and linkage disequilibrium.
 <div align="center">
- <!-- <img width="800" height="800" alt="rbam-figure" src="https://github.com/user-attachments/assets/fc9bc1b6-d1de-4c5f-99eb-cd2a5f9efdbe" /> -->
-    <!-- <img width="800" height="800" alt="rbam_final" src="https://github.com/user-attachments/assets/1e833aa4-86db-4ed9-ba5b-78f7fa9c5169" /> -->
+ <!-- <img width="800" height="800" alt="gevat-figure" src="https://github.com/user-attachments/assets/fc9bc1b6-d1de-4c5f-99eb-cd2a5f9efdbe" /> -->
+    <!-- <img width="800" height="800" alt="gevat_final" src="https://github.com/user-attachments/assets/1e833aa4-86db-4ed9-ba5b-78f7fa9c5169" /> -->
 </div>
 <!-- <img width="6100" height="7160" alt="image" src="https://github.com/user-attachments/assets/1e833aa4-86db-4ed9-ba5b-78f7fa9c5169" /> -->
 
 
 ## Installation
 
-1. Clone the RBAM repository:
+1. Clone the GEVAT repository:
 ```bash
-git clone https://github.com/davidenoma/rbam.git
+git clone https://github.com/davidenoma/gevat.git
 ```
 
 2. Clone the MOKA pipeline (required for association mapping):
@@ -28,7 +28,7 @@ git clone https://github.com/davidenoma/moka.git  ~/moka
 3. (Recommended) Create a new Python 3.9 environment:
 
 #### Using Conda
-source rbam_env/bin/activate
+source gevat_env/bin/activate
 ```
 
 4. Install Python dependencies:
@@ -74,7 +74,7 @@ The framework supports both:
 
 #### For Variational Autoencoder (VAE)
 ```bash
-python runner/rbam_main.py test_geno/test_geno.raw test_geno/test_geno.bim cc
+python runner/gevat_main.py test_geno/test_geno.raw test_geno/test_geno.bim cc
 ```
 
 **Parameters:**
@@ -92,7 +92,7 @@ plink --recode A --bfile genotype_file --out genotype_file
 
 #### For Autoencoder with XAI
 ```bash
-python runner/rbam_XAI_main.py test_geno/test_geno.raw test_geno/test_geno.bim cc
+python runner/gevat_XAI_main.py test_geno/test_geno.raw test_geno/test_geno.bim cc
 ```
 
 **Features:**
@@ -109,9 +109,9 @@ python runner/rbam_XAI_main.py test_geno/test_geno.raw test_geno/test_geno.bim c
 ### 2. Latent Space Classification
 
 ```bash
-python runner/rbam_predictor.py test_geno/test_geno.raw
+python runner/gevat_predictor.py test_geno/test_geno.raw
 ```
-#### RBAM Dual Task: `runner/rbam_dual_task.py`
+#### GEVAT Dual Task: `runner/gevat_dual_task.py`
 
 A compact runner to train the  VAE + Classifier (default).
 
@@ -119,10 +119,10 @@ Quick usage
 
 ```bash
 # Train (Joint VAE + Classifier) on .raw data
-python runner/rbam_dual_task.py test_geno/test_geno.raw
+python runner/gevat_dual_task.py test_geno/test_geno.raw
 
 # Run CV and hyperparameter tuning
-python runner/rbam_dual_task.py test_geno/test_geno.raw --run_cv --run_hyperopt --max_evals 10
+python runner/gevat_dual_task.py test_geno/test_geno.raw --run_cv --run_hyperopt --max_evals 10
 ```
 
 Key arguments (short)
@@ -146,7 +146,7 @@ Key arguments (short)
 - Multiple performance metrics (Accuracy, AU-ROC)
 
 **Output:**
-- Classification results: `model_outputs/rbam_classifier/`
+- Classification results: `model_outputs/gevat_classifier/`
 - Performance metrics for each classifier
 - Trained model(s), predictions, and metrics in `--output_dir` (default: `./model_outputs`).
 - CV and hyperopt results saved under `model_outputs/cv/` and `model_outputs/hyperopt/`.
@@ -254,7 +254,7 @@ python single_folder_reconstruction_and_moka.py test_geno --plink-path /usr/loca
 ├── model_outputs/                 # Analysis results
 │   ├── hopt_AE/                   # Autoencoder results
 │   │   └── shap_values_*/         # SHAP analysis
-│   └── rbam_classifier/           # Classification results
+│   └── gevat_classifier/           # Classification results
 ├── output_weights/                # Extracted weights
 │   ├── hopt/                      # Binary trait weights
 │   └── hopt_cc_com_or_quant/     # Quantitative trait weights
@@ -312,7 +312,7 @@ The framework provides comprehensive evaluation:
 
 ## Citation
 
-If you use RBAM in your research, please cite: 
+If you use GEVAT in your research, please cite:
 Representation learning-based genome-wide association mapping discovers genes underlying complex traits
 https://doi.org/10.21203/rs.3.rs-7624342/v1  
 

@@ -48,7 +48,7 @@ phenotype = np.where(phenotype == 1, 0, 1)
 
 # Extract SNP file name from path
 snp_file_name = os.path.basename(snp_data_loc)
-hopt = "rbam_classifier"
+hopt = "gevat_classifier"
 
 # Define the VAE class
 @keras.saving.register_keras_serializable(package="Custom", name="VAE")

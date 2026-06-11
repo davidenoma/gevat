@@ -19,10 +19,10 @@ TEST_SIZE=0.2
 
 mkdir -p "$OUTPUT_DIR"
 
-echo "Running RBAM dual task (Joint VAE + Classifier) on $RAW_FILE"
+echo "Running GEVAT dual task (Joint VAE + Classifier) on $RAW_FILE"
 echo "Output -> $OUTPUT_DIR"
 
-$PYTHON runner/rbam_dual_task.py \
+$PYTHON runner/gevat_dual_task.py \
   "$RAW_FILE" \
   --output_dir "$OUTPUT_DIR" \
   --epochs $EPOCHS \
