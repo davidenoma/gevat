@@ -283,9 +283,9 @@ python single_folder_reconstruction_and_moka.py test_geno --plink-path /usr/loca
 - **Performance Metrics**: Accuracy & AUC
 
 ### 4. Association Mapping
-- **Integration with MOKA**: Seamless pipeline for GWAS
-- **Multiple Weight Strategies**: Different biological interpretations
-- **Spectral Decorrelation**: Optional preprocessing for population structure
+- **Integration with MOKA**: Seamless pipeline for GWAS using the neural network weights to implment:
+- GEVAT variants (E,D,ED & XAI)
+
 
 ### Refer to moka documentation for more details on association mapping steps
 #### Link https://github.com/davidenoma/moka
