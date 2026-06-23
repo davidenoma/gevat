@@ -27,14 +27,16 @@ git clone https://github.com/davidenoma/moka.git  ~/moka
 
 3. (Recommended) Create a new Python 3.9 environment:
 
-#### Using Conda
-source gevat_env/bin/activate
-```
+
 
 4. Install Python dependencies:
 
-#### Using Conda
+#### Using Conda (Recommended!)
 ```bash
+conda create -n gevat_env python=3.9
+conda activate gevat_env
+conda install --file requirements.txt
+```
 conda install --file requirements.txt
 ```
 
