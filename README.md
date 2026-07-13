@@ -110,53 +110,11 @@ python runner/gevat_XAI_main.py test_geno/test_geno.raw test_geno/test_geno.bim 
 - Merged SNP weights: `*_merged_snp_and_weights.csv`
 - Visualization plots: SHAP bar plots
 
-### 2. Latent Space Classification
 
-```bash
-python runner/gevat_predictor.py test_geno/test_geno.raw
-```
-#### GEVAT Dual Task: `runner/gevat_dual_task.py`
-
-A compact runner to train the  VAE + Classifier (default).
-
-Quick usage
-
-```bash
-# Train (Joint VAE + Classifier) on .raw data
-python runner/gevat_dual_task.py test_geno/test_geno.raw
-
-# Run CV and hyperparameter tuning
-python runner/gevat_dual_task.py test_geno/test_geno.raw --run_cv --run_hyperopt --max_evals 10
-```
-
-Key arguments (short)
-- `snp_data_loc`: Path to PLINK `.raw` file (expects `PHENOTYPE` column).
-- `--model_type`: kept for compatibility; only `joint` is supported.
-- `--test_size`: fraction held out as independent test (default: 0.2).
-- `--run_cv`, `--n_folds`, `--run_hyperopt`, `--max_evals`, `--latent_dim`, `--epochs`, `--batch_size`, `--learning_rate`.
-
-
-**Classifiers Implemented:**
-- Logistic Regression
-- Random Forest
-- XGBoost
-- Neural Network (TensorFlow)
-- Dual Task (VAE + latent space classifier)
-
-**Features:**
-- Automated hyperparameter tuning
-- Cross-validation
-
-- Multiple performance metrics (Accuracy, AU-ROC)
-
-**Output:**
-- Classification results: `model_outputs/gevat_classifier/`
-- Performance metrics for each classifier
-- Trained model(s), predictions, and metrics in `--output_dir` (default: `./model_outputs`).
 - CV and hyperopt results saved under `model_outputs/cv/` and `model_outputs/hyperopt/`.
 
 
-### 3. Single Folder Processing with MOKA Pipeline
+### 2. Single Folder Processing with MOKA Pipeline
 
 For comprehensive analysis including association mapping:
 
@@ -267,52 +225,49 @@ python single_folder_reconstruction_and_moka.py test_geno --plink-path /usr/loca
     └── output_plots/                # Manhattan plots
 ```
 
-## Key Features
+### Optional Latent Space Classification Functionality 
 
-### 1. Representation Learning
-- **Variational Autoencoders (VAE)**: Learn latent representations accounting for genetic architecture
-- **Hyperparameter Optimization**: Automated tuning using Hyperopt
-- **Cross-validation**: Robust model evaluation
+```bash
+python runner/gevat_predictor.py test_geno/test_geno.raw
+```
+#### GEVAT Dual Task: `runner/gevat_dual_task.py`
 
-### 2. Explainable AI
-- **SHAP Analysis**: Feature importance for individual SNPs
-- **Multiple Weight Types**: Encoder, decoder, and combined weights
-- **Visualization**: Bar plots and importance rankings
+A compact runner to train the  VAE + Classifier (default).
 
-### 3. Classification Framework
-- **Multiple Algorithms**: Logistic Regression, Random Forest, XGBoost, Neural Networks
-- **Class Imbalance Handling**: Balanced class weights and downsampling
-- **Performance Metrics**: Accuracy & AUC
+Quick usage
 
-### 4. Association Mapping
-- **Integration with MOKA**: Seamless pipeline for GWAS using the neural network weights to implment:
-- GEVAT variants (E,D,ED & XAI)
+```bash
+# Train (Joint VAE + Classifier) on .raw data
+python runner/gevat_dual_task.py test_geno/test_geno.raw
+
+# Run CV and hyperparameter tuning
+python runner/gevat_dual_task.py test_geno/test_geno.raw --run_cv --run_hyperopt --max_evals 10
+```
+
+Key arguments (short)
+- `snp_data_loc`: Path to PLINK `.raw` file (expects `PHENOTYPE` column).
+- `--model_type`: kept for compatibility; only `joint` is supported.
+- `--test_size`: fraction held out as independent test (default: 0.2).
+- `--run_cv`, `--n_folds`, `--run_hyperopt`, `--max_evals`, `--latent_dim`, `--epochs`, `--batch_size`, `--learning_rate`.
 
 
-### Refer to moka documentation for more details on association mapping steps
-#### Link https://github.com/davidenoma/moka
+**Classifiers Implemented:**
+- Logistic Regression
+- Random Forest
+- XGBoost
+- Neural Network (TensorFlow)
+- Dual Task (VAE + latent space classifier)
 
-## Performance Metrics
+**Features:**
+- Automated hyperparameter tuning
+- Cross-validation
 
-The framework provides comprehensive evaluation:
+- Multiple performance metrics (Accuracy, AU-ROC)
 
-- **Reconstruction Quality**: MSE and R² scores
-- **Feature Importance**: Encoder and decoder VAE weight distributions and SHAP values on Autoencoder
-- **Classification Performance**: Cross Validated prediction metrics (Accuracy, AUC)
-- **Association Results**: Manhattan plots, KEGG and GO enrichment analyses
-
-## Troubleshooting
-
-### Common Issues
-
-1. **GPU Memory Issues**: Reduce batch size or use CPU-only mode
-2. **PLINK Errors**: Ensure PLINK is in PATH and data format is correct
-3. **Missing Dependencies**: Install all required packages and external tools
-
-### Memory Optimization
-- Use smaller batch sizes for large datasets
-- Enable TensorFlow memory growth: `tf.config.experimental.set_memory_growth()`
-- Consider data chunking for very large genotype files
+**Output:**
+- Classification results: `model_outputs/gevat_classifier/`
+- Performance metrics for each classifier
+- Trained model(s), predictions, and metrics in `--output_dir` (default: `./model_outputs`).
 
 ## Citation
 
