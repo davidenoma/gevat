@@ -225,50 +225,6 @@ python single_folder_reconstruction_and_moka.py test_geno --plink-path /usr/loca
     └── output_plots/                # Manhattan plots
 ```
 
-### Optional Latent Space Classification Functionality 
-
-```bash
-python runner/gevat_predictor.py test_geno/test_geno.raw
-```
-#### GEVAT Dual Task: `runner/gevat_dual_task.py`
-
-A compact runner to train the  VAE + Classifier (default).
-
-Quick usage
-
-```bash
-# Train (Joint VAE + Classifier) on .raw data
-python runner/gevat_dual_task.py test_geno/test_geno.raw
-
-# Run CV and hyperparameter tuning
-python runner/gevat_dual_task.py test_geno/test_geno.raw --run_cv --run_hyperopt --max_evals 10
-```
-
-Key arguments (short)
-- `snp_data_loc`: Path to PLINK `.raw` file (expects `PHENOTYPE` column).
-- `--model_type`: kept for compatibility; only `joint` is supported.
-- `--test_size`: fraction held out as independent test (default: 0.2).
-- `--run_cv`, `--n_folds`, `--run_hyperopt`, `--max_evals`, `--latent_dim`, `--epochs`, `--batch_size`, `--learning_rate`.
-
-
-**Classifiers Implemented:**
-- Logistic Regression
-- Random Forest
-- XGBoost
-- Neural Network (TensorFlow)
-- Dual Task (VAE + latent space classifier)
-
-**Features:**
-- Automated hyperparameter tuning
-- Cross-validation
-
-- Multiple performance metrics (Accuracy, AU-ROC)
-
-**Output:**
-- Classification results: `model_outputs/gevat_classifier/`
-- Performance metrics for each classifier
-- Trained model(s), predictions, and metrics in `--output_dir` (default: `./model_outputs`).
-
 ## Citation
 
 If you use GEVAT in your research, please cite.
