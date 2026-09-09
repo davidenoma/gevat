@@ -137,10 +137,13 @@ def create_autoencoder(input_dim, num_hidden_layers_encoder, num_hidden_layers_d
         *[tf.keras.layers.Dense(layer, activation=activation) for layer in encoder_layers[1:]]
     ])
 
-    decoder_layers = [latent_dim] + [decoding_dimensions] * num_hidden_layers_decoder + [input_dim]
     decoder = tf.keras.Sequential([
         tf.keras.layers.Input(shape=(latent_dim,)),
-        *[tf.keras.layers.Dense(layer, activation=activation) for layer in decoder_layers[1:]]
+        *[
+            tf.keras.layers.Dense(decoding_dimensions, activation=activation)
+            for _ in range(num_hidden_layers_decoder)
+        ],
+        tf.keras.layers.Dense(input_dim, activation=None),
     ])
 
     autoencoder = Autoencoder(encoder=encoder, decoder=decoder)

@@ -71,10 +71,11 @@ def vae_loss(encoder):
 
     def loss(x, x_reconstructed):
         z_mean, z_log_var = tf.split(encoder(x), num_or_size_splits=2, axis=1)
-        reconstruction_loss = tf.reduce_mean(tf.keras.losses.binary_crossentropy(x, x_reconstructed))
+        reconstruction_loss = tf.reduce_mean(
+            tf.square(tf.cast(x, x_reconstructed.dtype) - x_reconstructed)
+        )
         kl_loss = -0.5 * tf.reduce_mean(1 + z_log_var - tf.square(z_mean) - tf.exp(z_log_var))
-        total_loss = tf.maximum(reconstruction_loss + kl_loss, 0)  # Prevent negative loss
-        return total_loss
+        return reconstruction_loss + kl_loss
     return loss
 
 def create_vae_model(input_dim, num_hidden_layers_encoder, num_hidden_layers_decoder, encoding_dimensions,
@@ -85,10 +86,13 @@ def create_vae_model(input_dim, num_hidden_layers_encoder, num_hidden_layers_dec
         *[tf.keras.layers.Dense(layer, activation=activation) for layer in encoder_layers[1:]]
     ])
 
-    decoder_layers = [latent_dim] + [decoding_dimensions] * num_hidden_layers_decoder + [input_dim]
     decoder = tf.keras.Sequential([
         tf.keras.layers.Input(shape=(latent_dim,)),
-        *[tf.keras.layers.Dense(layer, activation=activation) for layer in decoder_layers[1:]]
+        *[
+            tf.keras.layers.Dense(decoding_dimensions, activation=activation)
+            for _ in range(num_hidden_layers_decoder)
+        ],
+        tf.keras.layers.Dense(input_dim, activation=None),
     ])
 
     vae = VAE(encoder=encoder, decoder=decoder)

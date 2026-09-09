@@ -6,13 +6,10 @@
 
 ## Overview
 GEVAT (Genotype-Embedding-Weighted Variance-Component Test) is a framework that leverages variational autoencoders (VAE) to learn latent genotype representations, facilitating representation-informed association mapping and phenotype classification. This approach addresses limitations of traditional GWAS by accounting for polygenicity, epistatic interactions, and linkage disequilibrium.
-<div align="center">
+
 
  <img width="800" height="800" alt="fig1" src="https://github.com/user-attachments/assets/45a9332f-9c8f-4b8f-a0ac-ba66938105f9" />
 
-    <!-- <img width="800" height="800" alt="gevat_final" src="https://github.com/user-attachments/assets/1e833aa4-86db-4ed9-ba5b-78f7fa9c5169" /> -->
-</div>
-<!-- <img width="6100" height="7160" alt="image" src="https://github.com/user-attachments/assets/1e833aa4-86db-4ed9-ba5b-78f7fa9c5169" /> -->
 
 
 ## Installation
